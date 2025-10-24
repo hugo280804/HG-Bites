@@ -446,7 +446,16 @@ body.no-scroll {
 @media (max-width: 768px) {
   .menu-toggle { display: block; }
   .nav-menu { display: none; }
-  .desktop-action .btn{display: block;}
+  .desktop-action .btn{
+    display: block;
+    padding: 0.5rem 1rem;
+    background: #f57c00;
+    color: white;
+    border-radius: 1rem;
+    font-size: 1.1rem;
+    box-shadow: rgba(0,0,0,0.1) 0 2px 1px;
+    transition: .3s ease-in-out;
+}
   .mobile-menu.active {
     display: flex;
     flex-direction: column;
@@ -459,6 +468,7 @@ body.no-scroll {
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
 }
 
 }
