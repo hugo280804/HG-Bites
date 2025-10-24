@@ -146,10 +146,10 @@ body.no-scroll {
 
 .mobile-menu {
   position: fixed;
-  top: 130px;
+  top: 110px;
   left: 0;
   width: 100%;
-  height: calc(100vh - 180px);
+  height: calc(100vh - 160px);
   background: rgba(255, 140, 0, 0.9);
   color: #ffffff;
   transform: translateY(-100vh);
@@ -177,6 +177,8 @@ body.no-scroll {
 .mobile-menu{
     list-style: none;
 }
+
+
 .mobile-menu a {
     
     color: #fff;
@@ -433,7 +435,7 @@ body.no-scroll {
 }
 
 /* ===========================
-   MENU MOBILE (Hamburger)
+   MENU MOBILE 
 =========================== */
 /* .menu-toggle.open {
   display: none;
@@ -449,4 +451,14 @@ body.no-scroll {
     display: flex;
     flex-direction: column;
   }
+  .logo img {
+    display: block;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 }
