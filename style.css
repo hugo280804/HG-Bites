@@ -146,10 +146,10 @@ body.no-scroll {
 
 .mobile-menu {
   position: fixed;
-  top: 110px;
+  top: 105px;
   left: 0;
   width: 100%;
-  height: calc(100vh - 160px);
+  height: calc(100vh - 158px);
   background: rgba(255, 140, 0, 0.9);
   color: #ffffff;
   transform: translateY(-100vh);
@@ -444,7 +444,21 @@ body.no-scroll {
 } */
 .menu-toggle { display: none; }
 @media (max-width: 768px) {
-  .menu-toggle { display: block; }
+  .menu-toggle {
+     display: block;
+     cursor: pointer;        /* cho biết đây là nút bấm */
+     width: 45px;            /* kích thước vùng bấm */
+     height: 45px;
+     justify-content: center;
+     align-items: center;
+    }
+
+    .menu-toggle i {
+    font-size: 40px;        /* chỉnh kích thước icon */
+    color: black;            /* màu icon (ví dụ: trắng) */
+    }
+
+    
   .nav-menu { display: none; }
   .desktop-action .btn{
     display: block;
@@ -462,8 +476,8 @@ body.no-scroll {
   }
   .logo img {
     display: block;
-    width: 80px;
-    height: 80px;
+    width: 75px;
+    height: 75px;
     object-fit: cover;
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
