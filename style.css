@@ -332,6 +332,68 @@ body.no-scroll {
     font-size: clamp(1rem, 1.25vw, 1.5rem);
     line-height: 2rem;
 }
+.product-card {
+    width: 250px;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-family: Arial, sans-serif;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 15px;
+}
+
+.product-info h3 {
+    font-size: 1.1rem;
+    margin: 10px 0 5px 0;
+    color: #222;
+}
+
+.product-info .price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ff6600;
+    margin: 5px 0;
+}
+
+.product-info .description {
+    font-size: 0.85rem;
+    color: #555;
+    margin: 8px 0;
+}
+
+.btn-add {
+    display: block;
+    width: 100%;
+    padding: 8px 0;
+    background-color: #ccc;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-add:hover {
+    background-color: #ff6600;
+}
+
 
 /* ===========================
    FOOTER
@@ -454,7 +516,7 @@ body.no-scroll {
     }
 
     .menu-toggle i {
-    font-size: 40px;        /* chỉnh kích thước icon */
+    font-size: 38px;        /* chỉnh kích thước icon */
     color: black;            /* màu icon (ví dụ: trắng) */
     }
 
