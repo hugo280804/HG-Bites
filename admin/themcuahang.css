@@ -1,0 +1,96 @@
+body {
+    background: #f4f6f8;
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 40px;
+}
+
+/* Khung chính */
+.main-content {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Tiêu đề */
+.main-content h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #007bff;
+    font-size: 24px;
+}
+
+/* Label và input */
+.main-content label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+}
+
+.main-content input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+/* Nút submit */
+.main-content button[type="submit"] {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.main-content button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Link quay lại */
+.back-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.back-link a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.back-link a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .main-content {
+        padding: 20px;
+        margin: 20px;
+    }
+
+    .main-content h1 {
+        font-size: 20px;
+    }
+
+    .main-content input[type="text"],
+    .main-content button {
+        font-size: 14px;
+    }
+}

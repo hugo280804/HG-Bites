@@ -116,7 +116,7 @@ body.no-scroll {
 .cart-icon {
     position: relative;
     font-size: 1.5rem;
-    color:  #f57c00;
+    color:  black;
 }
 .cart-value {
     position: absolute;
@@ -125,7 +125,7 @@ body.no-scroll {
     width: 20px;
     aspect-ratio: 1;
     border-radius: 50%;
-    background: gold;
+    background: #f57c00;
     color: black;
     text-align: center;
     line-height: 20px;
@@ -332,68 +332,102 @@ body.no-scroll {
     font-size: clamp(1rem, 1.25vw, 1.5rem);
     line-height: 2rem;
 }
-.product-card {
-    width: 250px;
-    background-color: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    font-family: Arial, sans-serif;
+
+/* Container grid */
+ #products {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* cố định 5 sản phẩm 1 hàng */
+    gap: 24px;
+    padding: 30px;
+    background: #fffaf7;
 }
 
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+/* Card sản phẩm */
+.product {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  overflow: hidden; /* giúp ảnh dính luôn vào bo góc */
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 0; /* không chừa khoảng trống */
 }
 
-.product-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
+.product img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  margin: 0; /* không để margin */
 }
 
-.product-info {
-    padding: 15px;
-}
 
-.product-info h3 {
-    font-size: 1.1rem;
-    margin: 10px 0 5px 0;
-    color: #222;
+/* Tên sản phẩm */
+.product h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color:  #f57c00;
 }
-
-.product-info .price {
+.product .ghi-chu
+{
     font-size: 1rem;
+    color:  #f57c00;
+}
+/* Giá sản phẩm */
+.price {
+    color: red;
     font-weight: bold;
-    color: #ff6600;
-    margin: 5px 0;
-}
-
-.product-info .description {
-    font-size: 0.85rem;
-    color: #555;
-    margin: 8px 0;
-}
-
-.btn-add {
+    font-size: 2rem;
     display: block;
-    width: 100%;
-    padding: 8px 0;
-    background-color: #ccc;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
+    margin-top: 6px;
+}
+
+/* Nút thêm giỏ hàng */
+.product .btn-cart {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #f57c00;
     color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1rem;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    justify-self: center;
 }
 
-.btn-add:hover {
-    background-color: #ff6600;
+.product:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
+.product .btn-cart:hover {
+    background: #ef6c00;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 1200px) {
+    #products {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Màn hình ≤ 768px: 2 sản phẩm 1 hàng */
+@media (max-width: 768px) {
+    #products {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Màn hình ≤ 480px: 1 sản phẩm 1 hàng */
+@media (max-width: 480px) {
+    #products {
+        grid-template-columns: 1fr;
+    }
+}
 
 /* ===========================
    FOOTER

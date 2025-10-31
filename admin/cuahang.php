@@ -1,11 +1,15 @@
 <?php
 include __DIR__ . '/../includes/db.php';
+
+// Lấy danh sách cửa hàng
+$sql = "SELECT * FROM cuahang ORDER BY id DESC";
+$result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Danh sách sản phẩm</title>
+<title>Danh sách cửa hàng</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 body {
@@ -74,13 +78,6 @@ h1 {
     background: #eef5ff;
     transition: background 0.2s ease;
 }
-img {
-    max-width: 120px;
-    height: auto;
-    border-radius: 8px;
-    display: block;
-    margin: 0 auto;
-}
 .action a {
     display: inline-block;
     margin: 0 6px;
@@ -117,55 +114,46 @@ img {
 </style>
 </head>
 <body>
+
 <div class="main-content">
     <div class="header-row">
-        <h1>Danh sách sản phẩm</h1>
-        <a href="themsp.php" class="add-btn">+ Thêm sản phẩm mới</a>
+        <h1>📍 Danh sách cửa hàng</h1>
+        <a href="themcuahang.php" class="add-btn">+ Thêm cửa hàng mới</a>
     </div>
 
     <table class="table">
         <tr>
-    
-            <th>Mã</th>
-            <th>Tên</th>
-            <th>Ảnh</th>
-            <th>Giá</th>
-            <th>Mô tả</th>
-            <th>Danh mục</th>
+            <th>ID</th>
+            <th>Tên cửa hàng</th>
+            <th>Địa chỉ</th>
+            <th>SĐT</th>
+            <th>Vĩ độ</th>
+            <th>Kinh độ</th>
             <th>Hành động</th>
         </tr>
-
         <?php
-        // Truy vấn JOIN sản phẩm + danh mục
-        $sql = "SELECT sp.*, dm.TenDanhMuc 
-                FROM sanpham sp 
-                LEFT JOIN danhmuc dm ON sp.danh_muc = dm.MaDanhMuc
-                ORDER BY sp.id ASC";
-        $result = $conn->query($sql);
-
         if ($result && $result->num_rows > 0) {
-            while($row = $result->fetch_assoc()){
-                $tenDM = $row['TenDanhMuc'] ?? 'Không xác định';
+            while($row = $result->fetch_assoc()) {
                 echo "<tr>";
-        
-                echo "<td>{$row['ma']}</td>";
-                echo "<td>{$row['ten']}</td>";
-                echo "<td><img src='../img/{$row['anh']}' alt='{$row['ten']}'></td>";
-                echo "<td>" . number_format($row['gia'],0,',','.') . " VNĐ</td>";
-                echo "<td>{$row['ghi_chu']}</td>";
-                echo "<td>$tenDM</td>";
+                echo "<td>{$row['id']}</td>";
+                echo "<td>" . htmlspecialchars($row['ten']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['diachi']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['sdt']) . "</td>";
+                echo "<td>{$row['latitude']}</td>";
+                echo "<td>{$row['longitude']}</td>";
                 echo "<td class='action'>
-                        <a href='suasp.php?id={$row['id']}' class='edit'>Sửa</a>
-                        <a href='xoasp.php?id={$row['id']}' class='delete' onclick=\"return confirm('Bạn có chắc muốn xóa?')\">Xóa</a>
+                        <a href='suacuahang.php?id={$row['id']}' class='edit'>Sửa</a>
+                        <a href='xoacuahang.php?id={$row['id']}' class='delete' onclick=\"return confirm('Bạn có chắc muốn xóa cửa hàng này?')\">Xóa</a>
                       </td>";
                 echo "</tr>";
             }
         } else {
-            echo "<tr><td colspan='8' style='text-align:center;'>Chưa có sản phẩm nào</td></tr>";
+            echo "<tr><td colspan='7' style='text-align:center;'>Chưa có cửa hàng nào</td></tr>";
         }
         $conn->close();
         ?>
     </table>
 </div>
+
 </body>
 </html>
