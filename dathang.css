@@ -1,0 +1,326 @@
+/* ===========================
+   🌐 IMPORT FONT + RESET CSS
+=========================== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #fff;
+}
+
+/* ===========================
+   🌈 LINK CHUNG
+=========================== */
+a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.05rem;
+  transition: 0.2s;
+}
+a:hover { color: #f57c00; }
+
+/* ===========================
+   ⚙️ CLASS TIỆN ÍCH
+=========================== */
+.flex { display: flex; align-items: center; }
+.between { justify-content: space-between; }
+.gap-2 { gap: 2rem; }
+.wrapper {
+  max-width: 1400px;
+  margin: auto;
+  padding-inline: 1.5rem;
+}
+
+/* ===========================
+   🧭 HEADER - NAVBAR
+=========================== */
+.navbar {
+  background: rgba(255,255,255,0.9);
+  padding: 1rem 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 3000;
+}
+
+.logo img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+.logo img:hover { transform: scale(1.05); }
+
+/* --- Giỏ hàng + đăng nhập --- */
+.cart-icon {
+  position: relative;
+  font-size: 1.5rem;
+  color: black;
+}
+.cart-value {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background: #f57c00;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===========================
+   🚚 THANH “ĐẶT NGAY”
+=========================== */
+.destop-order {
+  background: #f57c00;
+  padding: 0.7rem 1.5rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.destop-order .container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.destop-order span,
+.destop-order a {
+  color: white;
+  font-size: 1.1rem;
+}
+.destop-order a i { margin-right: 0.4rem; }
+
+.btn-order {
+  padding: 0.6rem 1.6rem;
+  border-radius: 25px;
+  background: #e4002b;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.btn-order:hover {
+  background: white;
+  color: #e4002b;
+}
+
+/* ===========================
+   🏠 HERO DELIVERY (ẢNH + CHỌN)
+=========================== */
+.hero-delivery {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 130px;
+  overflow: hidden;
+}
+
+.hero-delivery .background-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.55);
+  z-index: 0;
+}
+
+.delivery-section {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  padding: 25px;
+  width: 90%;
+  max-width: 480px;
+  text-align: center;
+}
+
+/* --- Tabs --- */
+.delivery-tabs {
+  display: flex;
+  border-radius: 30px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+}
+.tab {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  cursor: pointer;
+  background: #f2f2f2;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.tab.active {
+  background: #e4002b;
+  color: white;
+}
+
+/* --- Nút lấy vị trí --- */
+.btn-location {
+  width: 100%;
+  background: #e4002b;
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+.btn-location:hover {
+  background: #f57c00;
+}
+
+/* --- Ô nhập địa chỉ --- */
+.address-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 30px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 1rem;
+  text-align: center;
+  transition: 0.3s;
+}
+.address-input:focus {
+  border-color: #e4002b;
+  box-shadow: 0 0 5px rgba(228,0,43,0.3);
+}
+
+/* ===========================
+   🗺️ BẢN ĐỒ & DANH SÁCH CỬA HÀNG
+=========================== */
+.map-section {
+  width: 100%;
+  padding: 2rem 1rem;
+  background: #fafafa;
+}
+
+#map {
+  width: 100%;
+  height: 420px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#store-list {
+  margin-top: 1.5rem;
+  max-width: 700px;
+  margin-inline: auto;
+}
+
+.sort-btn {
+  display: block;
+  width: 100%;
+  background: #e4002b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.sort-btn:hover {
+  background: #f57c00;
+}
+
+/* --- Thẻ cửa hàng --- */
+.store-card {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+.store-card:hover {
+  transform: translateY(-3px);
+}
+.store-card h3 {
+  color: #e4002b;
+  font-size: 1.2rem;
+}
+.store-card p {
+  font-size: 0.95rem;
+  margin: 4px 0;
+}
+.store-card .btn-duongdi {
+  margin-top: 6px;
+  background: #f57c00;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.store-card .btn-duongdi:hover {
+  background: #e4002b;
+}
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 1000; /* phải lớn hơn map */
+  border: 1px solid #ccc;
+}
+.suggestion-item {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.suggestion-item:hover {
+  background: #f0f0f0;
+}
+
+
+/* ===========================
+   📱 RESPONSIVE
+=========================== */
+@media (max-width: 768px) {
+  .logo img {
+    width: 70px;
+    height: 70px;
+  }
+  .destop-order .container {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .delivery-section {
+    width: 95%;
+  }
+}
+.address-input {
+  position: relative;
+  z-index: 1000; /* luôn nằm trên map */
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HG Bites</title>
+  <link rel="stylesheet" href="dathang.css">
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" />
+  
+  <!-- Leaflet map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+</head>
+
+<body>
+<header>
+  <nav class="navbar flex between wrapper">
+    <a href="#" class="logo">
+      <img src="img/Brown Simple Cute Catering Logo.png" alt="HG Bites Logo">
+    </a>
+    <div class="desktop-action flex gap-2">
+      <a href="#">English</a>
+      <a href="#" class="cart-icon">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-value">0</span>
+      </a>
+      <a href="#" class="btn">Đăng nhập <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <!-- Section chọn loại đơn -->
+  <section class="destop-order">
+    <div class="container">
+      <span>Đặt ngay</span>
+      <a href="#" id="giaoHangBtn"><i class="fa-solid fa-truck"></i> Giao hàng</a>
+      <a href="#" id="mangVeBtn"><i class="fa-solid fa-box-open"></i> Mang đi</a>
+      <a href="#" class="btn-order">Bắt đầu đặt hàng</a>
+    </div>
+  </section>
+
+  <!-- Khu vực chọn địa chỉ giao hàng / mang đi -->
+  <section class="hero-delivery">
+    <img src="img/fast-foode28093an-nhanh-hai-lau-420250924150028_5638830.jpg" class="background-img" alt="Background">
+
+    <div class="delivery-section">
+      <div class="delivery-tabs">
+        <button class="tab active">GIAO HÀNG</button>
+        <button class="tab">MANG VỀ</button>
+      </div>
+
+      <button class="btn-location" id="getLocationBtn">
+        <i class="fa-solid fa-location-dot"></i>
+        Sử dụng vị trí hiện tại của tôi
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <input type="text" id="addressInput" placeholder="Nhập địa chỉ của bạn hoặc nơi gần bạn" class="address-input">
+      <!-- Thêm nơi hiển thị ngày giờ -->
+      <div id="datetime-display" style="margin-top:5px; font-weight:bold;"></div>
+      <!-- Input chọn giờ -->
+         <div style="margin-top: 10px;">
+        <label for="dateInput">Chọn ngày: </label>
+        <input type="date" id="dateInput" min="<?= new Date().toISOString().split('T')[0] ?>">
+
+        <label for="timeInput">Chọn giờ: </label>
+        <input type="time" id="timeInput" min="08:00" max="21:00">
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- Bản đồ & danh sách cửa hàng -->
+  <section class="map-section">
+    <div id="map"></div>
+    <div id="store-list"></div>
+  </section>
+</main>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+<script src="dathang.js"></script>
+</body>
+</html>

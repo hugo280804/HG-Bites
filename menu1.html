@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" />
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="shortcut icon" href="img/favicon.ico">
-  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+
 
  
 </head>
@@ -21,8 +23,8 @@
          
              <li><a href="index.html">TRANG CHỦ</a></li>
             <li><a href="#">THỰC ĐƠN</a></li>
-            <li><a href="gioithieu.html">GIỚI THIỆU</a></li>
              <li><a href="#">KHUYẾN MÃI</a></li>
+            <li><a href="#">GIỚI THIỆU</a></li>
             <li><a href="#">LIÊN HỆ</a></li>
             <li><a href="cuahang.html">CỬA HÀNG</a></li>
         </ul>
@@ -35,7 +37,8 @@
             </a>
             <a href="#" class="btn">Đăng nhập <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
             <!-- <a href="#" class="icon"><i class="fa-solid fa-bars"></i></a> -->
-        <!-- Giỏ hàng -->
+        </div>
+          <!-- Giỏ hàng -->
              <div class="cart-tab" id="cartTab">
                 <h2>Giỏ hàng của bạn</h2>
             <div class="cart-list"></div>
@@ -51,9 +54,8 @@
             </div>
             </div>
        
-          
+                
        </nav>
- 
 </header>
 <main>
   
@@ -62,14 +64,8 @@
 <!-- Div cha bọc 2 phần -->
  <div id="main-content">
      <section class="destop-order">
-      <div class="container">
-        <span>Đặt ngay</span>
-        <a href="#"><i class="fa-solid fa-truck"></i> Giao hàng</a>
-        <a href="#"><i class="fa-solid fa-box-open"></i> Mang đi</a>
-        <a href="dathang.html" class="btn-order">Bắt đầu đặt hàng</a>
-        <div id="order-info" class="order-info"></div>
+        <div id="orderInfo"></div>
 
-    </div>
   </section>
   <div id="ui-wrapper">
     <!-- Icon tìm kiếm -->
@@ -97,8 +93,8 @@
 
     </div>
   </div>
-  <div id="ketqua"></div>
-  <!-- Danh sách sản phẩm -->
+
+
   <div id="products">
     <!-- các sản phẩm -->
   </div>
@@ -108,6 +104,67 @@
 <script src="menu.js"></script>
 <!-- ====== Danh sách sản phẩm ====== -->
 
+<script>
+fetch("menu1.php")
+    .then(res => res.json())
+    .then(data => {
+
+        if (data.error) {
+            document.getElementById("orderInfo").innerHTML =
+                `<p style="color:red;">${data.error}</p>`;
+            return;
+        }
+ document.getElementById("orderInfo").innerHTML = `
+<div style="
+    background:#fff;
+    padding:16px 20px;
+    border-radius:16px;
+    border-left:6px solid #E4002B;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    font-family:Arial, sans-serif;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+">
+    <div style="display:flex; align-items:center; gap:8px;">
+        <i class="fa-solid fa-location-dot" style="color:#E4002B; font-size:18px;"></i>
+        <p style="margin:0; font-size:16px;"><strong>Địa chỉ:</strong> ${data.diachi_khach}</p>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:8px;">
+        <i class="fa-solid fa-clock" style="color:#E4002B; font-size:18px;"></i>
+        <p style="margin:0; font-size:16px;"><strong>Ngày giờ đặt:</strong> ${data.ngay_dat} — ${data.gio_dat}</p>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:8px;">
+        <i class="fa-solid fa-store" style="color:#E4002B; font-size:18px;"></i>
+        <p style="margin:0; font-size:16px;"><strong>Cửa hàng:</strong> ${data.cuahang}</p>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:8px;">
+        <i class="fa-solid fa-basket-shopping" style="color:#E4002B; font-size:18px;"></i>
+        <p style="margin:0; font-size:16px;"><strong>Loại đặt hàng:</strong> ${data.loai_dat_hang}</p>
+    </div>
+    <div style="display:flex; align-items:center; gap:8px;">
+    <a href="dathang.html" id="chevronIcon" style="color:#E4002B; font-size:18px; text-decoration:none;">⥮ Thay đổi</a>
+</div>
+
+
+</div>
+`;
+
+    })
+    .catch(err => {
+        document.getElementById("orderInfo").innerHTML =
+            `<p style="color:red;">Lỗi tải dữ liệu</p>`;
+    });
+
+chevronIcon.onclick = () => chevronIcon.textContent = chevronIcon.textContent === "⥮" ? "⥯" : "⥮";
+
+
+</script>
 
 
 </main>

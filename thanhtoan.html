@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thanh toán Momo QR</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" />
+<style>
+    body { font-family: "Roboto Condensed", sans-serif; margin: 0; padding: 0; background: #fdf6f0; }
+    header {
+        background: #f57c00; color: white; padding: 1rem 2rem;
+        text-align: center; font-size: 1.5rem; font-weight: bold;
+        display: flex; align-items: center; justify-content: center; gap: 15px;
+    }
+    header .logo img { width: 60px; height: 60px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+
+    main { max-width: 900px; margin: 2rem auto; background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h2 { color: #f57c00; margin-bottom: 1rem; }
+    .order-info { margin-bottom: 2rem; }
+    .order-box { background:#fff; padding:16px 20px; border-radius:16px; border-left:6px solid #E4002B;
+        box-shadow:0 4px 12px rgba(0,0,0,0.08); display:flex; justify-content:space-between;
+        align-items:center; gap:15px; flex-wrap:wrap; margin-bottom: 1.5rem; }
+    .order-box div { display:flex; align-items:center; gap:8px; }
+    .order-box div p { margin:0; font-size:16px; }
+
+    .cart-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 1.5rem; }
+    .cart-item { display: flex; justify-content: space-between; align-items: center; background: #ffecdb; padding: 10px 15px; border-radius: 8px; }
+    .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; }
+    .cart-item-info { flex: 1; margin-left: 15px; }
+    .cart-item-info h4 { margin: 0; color: #f57c00; }
+    .cart-item-info p { margin: 0; font-weight: bold; color: red; }
+
+    .payment-method { margin-top: 1rem; }
+    .payment-method label { display: block; margin-bottom: 0.5rem; font-size: 1.1rem; cursor: pointer; }
+    .payment-method input { margin-right: 10px; }
+
+    .momo-qr { display: none; text-align: center; margin-top: 1.5rem; padding: 20px; background: #fff3e0; border: 2px dashed #f57c00; border-radius: 12px; }
+    .momo-qr img { width: 300px; max-width: 80%; height: auto; border-radius: 12px; margin-top: 10px; }
+    .momo-qr p { font-size: 1.2rem; font-weight: bold; color: #f57c00; }
+
+    .checkout-btn { display: block; margin-top: 2rem; width: 100%; padding: 12px; background: #ff8c00; color: white; font-size: 1.2rem; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .checkout-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(255,140,0,0.3); }
+    .total-price { margin-top: 1rem; font-weight: bold; font-size: 1.2rem; text-align: right; }
+</style>
+</head>
+<body>
+<header>
+    <a href="#" class="logo"> <img src="img/Brown Simple Cute Catering Logo.png" alt="Logo"></a> 
+    Thanh toán đơn hàng
+</header>
+
+<main>
+    <section class="order-info" id="order-info">
+        <h2>Thông tin đơn hàng</h2>
+    </section>
+
+    <section class="cart-list" id="cart-list">
+    </section>
+
+    <div class="total-price" id="total-price"></div>
+
+    <section class="payment-method">
+        <h2>Chọn phương thức thanh toán</h2>
+        <label><input type="radio" name="payment" value="tienmat" checked> Tiền mặt</label>
+        <label><input type="radio" name="payment" value="momo"> Momo QR <i class="fa-brands fa-cc-amazon-pay"></i></label>
+
+        <div class="momo-qr" id="momo-qr">
+            <p>Quét QR Momo để thanh toán</p>
+            <img src="img/image.png" alt="Momo QR">
+        </div>
+    </section>
+
+    <button class="checkout-btn" id="checkoutBtn">Xác nhận thanh toán</button>
+</main>
+
+<script>
+    // --- Lấy đơn hàng mới nhất từ PHP ---
+    fetch("menu1.php")
+        .then(res => res.json())
+        .then(data => {
+            const orderInfo = document.getElementById("order-info");
+            if(data.error){
+                orderInfo.innerHTML += `<p style="color:red;">${data.error}</p>`;
+                return;
+            }
+            orderInfo.innerHTML += `
+                <p><b>Cửa hàng:</b> ${data.cuahang}</p>
+                <p><b>Địa chỉ:</b> ${data.diachi_khach}</p>
+                <p><b>Ngày :</b> ${data.ngay_dat}</p>
+                <p><b>Giờ:</b>  ${data.gio_dat}</p>
+                <p><b>Hình thức:</b> ${data.loai_dat_hang === 'giaohang' ? 'Giao hàng' : 'Mang đi'}</p>
+            `;
+
+
+        })
+        .catch(err => {
+            document.getElementById("order-info").innerHTML += `<p style="color:red;">Lỗi tải dữ liệu</p>`;
+        });
+
+    // --- Hiển thị giỏ hàng từ localStorage ---
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartList = document.getElementById("cart-list");
+    const totalPriceDiv = document.getElementById("total-price");
+    let total = 0;
+
+    cart.forEach(item => {
+        total += item.price * item.qty;
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `
+            <img src="img/${item.img}" alt="${item.name}">
+            <div class="cart-item-info">
+                <h4>${item.name}</h4>
+                <p>${item.price.toLocaleString()}₫ x ${item.qty}</p>
+            </div>
+            <div class="cart-item-total">${(item.price * item.qty).toLocaleString()}₫</div>
+        `;
+        cartList.appendChild(div);
+    });
+
+    totalPriceDiv.textContent = `Tổng cộng: ${total.toLocaleString()}₫`;
+
+    // --- Hiển thị QR khi chọn Momo ---
+    const paymentRadios = document.querySelectorAll('input[name="payment"]');
+    const momoQR = document.getElementById("momo-qr");
+    paymentRadios.forEach(radio => {
+        radio.addEventListener("change", () => {
+            momoQR.style.display = radio.value === "momo" ? "block" : "none";
+        });
+    });
+
+    // --- Xác nhận thanh toán ---
+    document.getElementById("checkoutBtn").addEventListener("click", () => {
+        const payment = document.querySelector('input[name="payment"]:checked').value;
+        if(payment === "momo"){
+            alert(`Vui lòng quét QR Momo để thanh toán\nTổng: ${total.toLocaleString()}₫`);
+        } else {
+            alert(`Thanh toán thành công bằng Tiền mặt\nTổng: ${total.toLocaleString()}₫`);
+        }
+        localStorage.removeItem("cart");
+        window.location.href = "index.html";
+    });
+</script>
+</body>
+</html>
